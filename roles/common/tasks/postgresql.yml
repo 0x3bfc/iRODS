@@ -1,0 +1,33 @@
+---
+
+- name: add keyserver to apt
+  command: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+
+- name: add custom postgres repo to apt
+  lineinfile: dest=/etc/apt/sources.list.d/pgdg.list
+              line="deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" state=present
+              create=yes
+
+- name: ensure apt cache is up to date
+  apt: update_cache=yes
+
+- name: Install PostgrSQL and required packages
+  apt: name={{item}}
+  with_items:
+     - python-software-properties
+     - software-properties-common
+     - libpq-dev
+     - python-psycopg2
+     - postgresql-9.4
+
+- name: postgresql should listen on all ports
+  lineinfile: dest=/etc/postgresql/9.4/main/postgresql.conf
+              regexp="^listen_addresses"
+              line="listen_addresses='*'" state=present
+
+- name: postgresql should allow access to host
+  copy: src=pg_hba.conf  dest=/etc/postgresql/9.4/main/pg_hba.conf
+  notify: restart postgresql
+
+- name: restart postgresql
+  service: name=postgresql state=restarted

@@ -1,0 +1,4 @@
+# postgreSQL vars
+dbname: vagrant
+dbuser: vagrant
+dbpassword: vagrant

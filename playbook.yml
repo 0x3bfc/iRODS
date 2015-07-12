@@ -1,0 +1,13 @@
+# THIS ANSIBLE PLAYBOOK FOR DEPLOYING AND INSTALLATION OF IRODS
+# MAINTAINER Ahmed Abdullah <ahmedaabdulwahed@gmail.com>
+
+- hosts: servers
+  sudo: yes
+  roles:
+   - role: common  
+
+# Install PostgreSQL
+- hosts: servers
+  sudo: yes
+  tasks:
+   - include: roles/common/tasks/postgresql.yml

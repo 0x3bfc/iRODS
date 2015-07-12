@@ -1,0 +1,21 @@
+---
+- name: Install python-apt, aptitude, and debconf-utils
+  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils python-software-properties csh
+
+- name: Set default locale to en_US.UTF-8
+  debconf: name=locales question='locales/default_environment_locale' value=en_US.UTF-8 vtype='select'
+
+- name: Generate locales
+  debconf: name=locales question='locales/locales_to_be_generated'  value='en_US.UTF-8 UTF-8' vtype='multiselect'
+
+- name: Set timezone area
+  debconf: name=tzdata question='tzdata/Areas' value='Etc' vtype='select'
+
+- name: Set timezone
+  debconf: name=tzdata question='tzdata/Zones/Etc' value='UTC' vtype='select'
+  notify:
+  - restart rsyslog
+
+- name: Install Common Packages
+  shell: apt-get install openssh-server 
+  
