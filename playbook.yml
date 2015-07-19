@@ -11,3 +11,9 @@
   sudo: yes
   tasks:
    - include: roles/common/tasks/postgresql.yml
+
+# Install iCAT
+- hosts: masters
+  sudo: yes
+  roles:
+   - role: icat

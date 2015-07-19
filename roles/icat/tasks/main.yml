@@ -1,0 +1,12 @@
+---
+
+- name: download iCAT
+  get_url: url={{ irods_icat }} dest=/home/{{ ansible_ssh_user }}/
+
+- name: download iRODS postgreSQL plugin
+  get_url: url={{ irods_postgre }} dest=/home/{{ ansible_ssh_user }}/
+
+- name: Install iCAT and Database Plugins
+  shell: 
+     dpkg -i /home/{{ ansible_ssh_user }}/{{ icat_pkg }} /home/{{ ansible_ssh_user }}/{{ postgre_pkg }};
+     apt-get -y -f install
