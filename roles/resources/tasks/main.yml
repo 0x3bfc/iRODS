@@ -1,21 +1,15 @@
 ---
+- name: download resources package
+  get_url: url={{ irods_resources }} dest=/home/{{ ansible_ssh_user }}/
 
-- name: download iCAT
-  get_url: url={{ irods_icat }} dest=/home/{{ ansible_ssh_user }}/
-
-- name: download iRODS postgreSQL plugin
-  get_url: url={{ irods_postgre }} dest=/home/{{ ansible_ssh_user }}/
-
-- name: Install iCAT and Database Plugins
-  shell: 
-     dpkg -i /home/{{ ansible_ssh_user }}/{{ icat_pkg }} /home/{{ ansible_ssh_user }}/{{ postgre_pkg }};
-     apt-get -y -f install
+- name: Install Resources Service
+  shell: dpkg -i /home/{{ ansible_ssh_user }}/{{ resources_pkg }} ;  apt-get -y -f install
 
 - name: response bootstrapping
   template: src=genresponse.j2 dest=/home/{{ ansible_ssh_user }}/genresponse.sh
 
 - name: generate setup responses
-  shell: 
+  shell:
      mkdir -p /opt/irods;
      mv /home/{{ ansible_ssh_user }}/genresponse.sh /opt/irods/genresponse.sh;
      chmod +x /opt/irods/genresponse.sh;
@@ -24,5 +18,6 @@
 - name: Install python packages
   shell: pip install -U pip jsonschema jinja2
 
-- name: config iCAT server
+- name: Configure Resource Service
   shell: /var/lib/irods/packaging/setup_irods.sh < /opt/irods/setup_responses
+ 

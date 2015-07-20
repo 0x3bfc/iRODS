@@ -12,8 +12,21 @@
   tasks:
    - include: roles/common/tasks/postgresql.yml
 
+- hosts: masters
+  sudo: yes
+  sudo_user: postgres
+  gather_facts: no
+  tasks:
+   - include: roles/common/tasks/db.yml
+
 # Install iCAT
 - hosts: masters
   sudo: yes
   roles:
    - role: icat
+
+# install Resources
+- hosts: slaves
+  sudo: yes
+  roles:
+   - role: resources

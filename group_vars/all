@@ -1,4 +1,24 @@
 # postgreSQL vars
-dbname: vagrant
-dbuser: vagrant
-dbpassword: vagrant
+dbname: icat
+dbuser: irods
+dbpassword: 123456
+dbport: 5432
+
+# icat configuration
+irods_admin: irodsadmin
+irods_passwd: 123456
+icatzone: vboxZone
+
+# common resource configurations
+account_user: irods
+account_group: irods
+icat_port: 1247
+port_range_begin: 20000
+port_range_end: 20199
+vault_directory: /var/lib/irods/Vault
+zone_key: m4rWHGgW4soMRT84
+negotiation_key: C4RLjbmKqvUYuJl4pT6QSp8dJy8fCX8Z
+control_plane_key: FyR1O7wkOj9FnIh_VgMIsdb812e1dQcN
+control_plane_port: 1248
+schema_uri: https://schemas.irods.org/configuration
+admin_host: master

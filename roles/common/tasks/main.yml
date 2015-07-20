@@ -1,6 +1,9 @@
 ---
 - name: Install python-apt, aptitude, and debconf-utils
-  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils python-software-properties csh
+  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils python-software-properties csh python-pip python-dev
+
+- name: Install python packages
+  shell: pip install jsonschema jinja2
 
 - name: Set default locale to en_US.UTF-8
   debconf: name=locales question='locales/default_environment_locale' value=en_US.UTF-8 vtype='select'
@@ -18,4 +21,17 @@
 
 - name: Install Common Packages
   shell: apt-get install openssh-server 
-  
+ 
+- name: Create the hosts file for all machines
+  template: src=hosts.j2 dest=/etc/hosts
+
+- name: copy private key
+  copy: src=id_rsa dest=/home/{{ ansible_ssh_user }}/.ssh/id_rsa
+
+- name: copy public key
+  copy: src=id_rsa.pub  dest=/home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub
+
+- name: authorized keys
+  shell: cat /home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub > /home/{{ ansible_ssh_user }}/.ssh/authorized_keys
+
+ 

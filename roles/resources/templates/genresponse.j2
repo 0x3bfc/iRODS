@@ -1,0 +1,23 @@
+#!/bin/bash
+# Generates responses for iRODS' resource setup_irods.sh script.
+
+RESPFILE=$1
+
+echo "{{ account_user }}" > $RESPFILE           # service account user ID
+echo "{{ account_group }}" >> $RESPFILE         # service account group ID
+echo "{{ icat_port }}" >> $RESPFILE      	# iCAT Port
+echo "{{ port_range_begin }}" >> $RESPFILE	# Parallel Port Range (Begin)
+echo "{{ port_range_end }}" >> $RESPFILE	# Parallel Port Range (End)
+echo "{{ vault_directory }}" >> $RESPFILE 	# Vault Directory
+echo "{{ zone_key }}" >> $RESPFILE	 	# zone_key
+echo "{{ negotiation_key }}" >> $RESPFILE 	# negotiation_key
+echo "{{ control_plane_port }}" >> $RESPFILE 	# controle plane port
+echo "{{ control_plane_key }}" >> $RESPFILE 	# controle plane key
+echo "{{ schema_uri }}" >> $RESPFILE 		# schema validation URI
+echo "{{ irods_admin }}" >> $RESPFILE       	# iRODS admin account
+echo "yes" >> $RESPFILE
+echo "{{ admin_host }}" >> $RESPFILE		# iCAT Host
+echo "{{ icatzone }}" >> $RESPFILE      	# iCAT zone 
+echo "yes" >> $RESPFILE
+echo "{{ irods_passwd }}" >> $RESPFILE  	# iRODS Administrator Password
+

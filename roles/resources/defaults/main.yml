@@ -1,0 +1,2 @@
+irods_resources: ftp://ftp.renci.org/pub/irods/releases/4.1.3/ubuntu12/irods-resource-4.1.3-ubuntu12-x86_64.deb
+resources_pkg: irods-resource-4.1.3-ubuntu12-x86_64.deb
