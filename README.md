@@ -1,9 +1,34 @@
 # iRODS
-Ansible Scripts for Installation and Deployment of IRODS
+The Integrated Rule-Oriented Data System (iRODS) is open source data management software used by research organizations and government agencies worldwide. This package contains Ansible Scripts for Installation and Deployment of iRODS on a cluster on virtual machines.
 
 # Configure iRODS
 
-Before start iRODS deployment, you have to generate some specific configuration keys and secrets, follow next steps
+Before starting iRODS deployment, you have to generate some specific configuration keys and secrets, follow the next steps
+
+**Install Vagrant**
+
+This deployment runs over virtual machines provisioned by virtualbox, so first I am going to install virtualbox then install vagrant and import virtualbox box file to vagrant
+
+install virtualbox
+
+     $ sudo apt-get install virtualbox
+
+install vagrant by downloading vagrant binaries from this [here](http://www.vagrantup.com/downloads.html), in our case, I am using Ubuntu 12.04 LTS 64 bits so I am going to install <code>vagrant_1.7.4_x86_64.rpm</code>
+
+     $ sudo dpk -i vagrant_1.7.4_x86_64.rpm
+
+**Install Ansible**
+
+Installation of Ansible on Ubuntu 12.04 LTS
+
+     $ sudo apt-get install software-properties-common
+     $ sudo apt-add-repository ppa:ansible/ansible
+     $ sudo apt-get update
+     $ sudo apt-get install ansible
+
+Other Linux Distributions
+
+to install on another Linux Distribution check out [Ansible Docs](http://docs.ansible.com/intro_installation.html)
 
 **Passwordless SSH**
 
@@ -16,7 +41,7 @@ Generate ssh private and public keys
 
 **Generate Required iRODS keys**
 
-modify group_vars/all file
+modify <code>group_vars/all</code> file
 
 Generate zone key and modify the value of zone_key
 
