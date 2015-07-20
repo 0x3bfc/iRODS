@@ -55,6 +55,20 @@ Generate control plane key and modify the value of controle plane key
 
     $ openssl rand -base64 32 | sed 's,/,S,g' | sed 's,+,_,g' | cut -c 1-32
 
+
+#Install iRODS
+
+Once you install vagrant, ansible, and configure you keys and passwords, you able to install your cluster, but first start a new cluster using vagrant, in this package, you have Vagrantfile which creates three nodes one iCAT server and two resources servers, the same thing can be done if you have pre-defined physical servers in hosts file, what we are going to do now is to start cluster of virtual machines over virtualbox using vagrantfile, if you want to increase number of cluster just by editing the <code>Vagrantfile</code>.
+
+Create Virtual Machines:
+
+    $ vagrant up --provider virtualbox
+
+Edit hosts file by modifying the hosts ip, username, and passwords for each server, then run ansible playbook
+
+    $ ansible-playbook -i hosts playbook.yml -vvvv
+
+
 #iRODS use cases:
 
 * iRODS enables data discovery using a metadata catalog that describes every file, every directory, and every storage resource in the data grid.
