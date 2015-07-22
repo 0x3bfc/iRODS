@@ -68,6 +68,12 @@ Edit hosts file by modifying the hosts ip, username, and passwords for each serv
 
     $ ansible-playbook -i hosts playbook.yml -vvvv
 
+**Test iDrobs-Web2**
+
+iDrobs web2 is a web interface for iRODS:
+
+    $ curl http://192.168.0.20:8080/login/login
+
 
 #iRODS use cases:
 

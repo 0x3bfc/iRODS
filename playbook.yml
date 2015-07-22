@@ -24,6 +24,7 @@
   sudo: yes
   roles:
    - role: icat
+   - role: idrob2
 
 # install Resources
 - hosts: slaves

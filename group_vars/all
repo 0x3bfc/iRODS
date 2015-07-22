@@ -22,3 +22,8 @@ control_plane_key: FyR1O7wkOj9FnIh_VgMIsdb812e1dQcN
 control_plane_port: 1248
 schema_uri: https://schemas.irods.org/configuration
 admin_host: master
+
+
+# idrop configuration
+idrop_port: 80
+idrob_web2_pkg: http://people.renci.org/~danb/FOR_DEMOS/iDrop-Web-2/idrop-web2.war

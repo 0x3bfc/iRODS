@@ -1,0 +1,57 @@
+---
+- name: Install OpenJDK 7
+  shell: 
+     apt-get -y install openjdk-7-jdk;
+     update-java-alternatives -s java-1.7.0-openjdk-amd64
+
+- name: Create common directories
+  shell: 
+    mkdir -p /usr/share/tomcat7;
+    mkdir -p /usr/share/tomcat7/common;
+    mkdir -p /usr/share/tomcat7/common/classes;
+    mkdir -p /usr/share/tomcat7/server;
+    mkdir -p /usr/share/tomcat7/server/classes;
+    mkdir -p /usr/share/tomcat7/shared;
+    mkdir -p /usr/share/tomcat7/shared/classes;
+    mkdir -p /etc/idrop-web;
+
+- name: Install Apache 2 & Tomcat 7
+  shell: 
+     apt-get -y install tomcat7 apache2;
+     rm -rf /var/lib/tomcat7/webapps/ROOT
+
+- name: configure Tomcat Server 
+  copy: src=server.xml dest=/etc/tomcat7/server.xml
+
+- name: copy configuration file
+  copy: src=idrop-web-config2.groovy dest=/etc/idrop-web/idrop-web-config2.groovy
+
+- name: Install iDROP-web2
+  get_url: url={{ idrob_web2_pkg }} dest=/var/lib/tomcat7/webapps/
+
+- name: change idrob root
+  shell: mv /var/lib/tomcat7/webapps/idrop-web2.war /var/lib/tomcat7/webapps/ROOT.war
+
+- name: copy AJP apache conf
+  template: src=ajp.apache.j2 dest=/etc/apache2/sites-available/ajp.apache
+
+- name: Reload apache configuration
+  shell:
+    a2enmod proxy_ajp;
+    a2dissite 000-default;
+    a2ensite ajp.apache;
+
+- name: configure idrob config
+  template: src=idrob-config.j2  dest=/opt/irods/update-idw-config.sh
+
+- name: copy tomcat start script
+  copy: src=tomcatstart.sh dest=/opt/irods/tcstart.sh
+
+- name: reset permissions
+  shell: chmod a+x /opt/irods/*.sh
+
+- name: start iDROP-Web2 
+  shell:
+    service apache2 start;
+    /opt/irods/update-idw-config.sh;
+    /opt/irods/tcstart.sh;
