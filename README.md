@@ -1,25 +1,25 @@
 # iRODS
-The Integrated Rule-Oriented Data System (iRODS) is open source data management software used by research organizations and government agencies worldwide. This package contains Ansible Scripts for Installation and Deployment of iRODS on a cluster on virtual machines.
+The Integrated Rule-Oriented Data System (iRODS) is an open source data management software used by research organizations and government agencies worldwide. This package contains Ansible Scripts for Installation and Deployment of iRODS on a cluster of virtual machines.
 
 # Configure iRODS
 
-Before starting iRODS deployment, you have to generate some specific configuration keys and secrets, follow the next steps
+Before starting iRODS deployment, you have to generate some specific configuration keys, secrets and install reuired packages, follow the next steps
 
 **Install Vagrant**
 
-This deployment runs over virtual machines provisioned by virtualbox, so first I am going to install virtualbox then install vagrant and import virtualbox box file to vagrant
+This deployment runs over virtual machines provisioned by virtualbox, so first I am going to install virtualbox then install vagrant to start our cluster.
 
 install virtualbox
 
      $ sudo apt-get install virtualbox
 
-install vagrant by downloading vagrant binaries from this [here](http://www.vagrantup.com/downloads.html), in our case, I am using Ubuntu 12.04 LTS 64 bits so I am going to install <code>vagrant_1.7.4_x86_64.rpm</code>
+Install vagrant by downloading vagrant binaries from this [here](http://www.vagrantup.com/downloads.html), in our case, I am using Ubuntu 12.04 LTS 64 bits as a Host OS, so I am going to install <code>vagrant_1.7.4_x86_64.rpm</code>
 
      $ sudo dpk -i vagrant_1.7.4_x86_64.rpm
 
 **Install Ansible**
 
-Installation of Ansible on Ubuntu 12.04 LTS
+Installation of Ansible on Ubuntu 12.04 LTS, Ansible is an automation tool to run your scipts over your infrastructure.
 
      $ sudo apt-get install software-properties-common
      $ sudo apt-add-repository ppa:ansible/ansible
@@ -28,7 +28,7 @@ Installation of Ansible on Ubuntu 12.04 LTS
 
 Other Linux Distributions
 
-to install on another Linux Distribution check out [Ansible Docs](http://docs.ansible.com/intro_installation.html)
+If you have another Linux Distribution or Operating System, kindly check out [Ansible Docs](http://docs.ansible.com/intro_installation.html)
 
 **Passwordless SSH**
 
@@ -58,7 +58,7 @@ Generate control plane key and modify the value of controle plane key
 
 #Install iRODS
 
-Once you install vagrant, ansible, and configure you keys and passwords, you able to install your cluster, but first start a new cluster using vagrant, in this package, you have Vagrantfile which creates three nodes one iCAT server and two resources servers, the same thing can be done if you have pre-defined physical servers in hosts file, what we are going to do now is to start cluster of virtual machines over virtualbox using vagrantfile, if you want to increase number of cluster just by editing the <code>Vagrantfile</code>.
+Once you install vagrant, ansible, and your keys and passwords are created, you are able to install iRODS over your cluster, but before that you have to start a new cluster using vagrant, in this package, you have Vagrantfile which creates three nodes one iCAT server containes (iCAT and iDROP-WEB2) and two resources servers, the same thing can be done if you have pre-defined physical servers in hosts file "<code>hosts</code>", what we are going to do now is to start cluster of virtual machines using virtualbox and vagrantfile, if you want to scale up your cluster just edit the <code>Vagrantfile</code> and <code>hosts</code> file.
 
 Create Virtual Machines:
 
