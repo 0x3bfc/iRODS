@@ -1,6 +1,8 @@
 # iRODS
 The Integrated Rule-Oriented Data System (iRODS) is an open source data management software used by research organizations and government agencies worldwide. This package contains Ansible Scripts for Installation and Deployment of iRODS on a cluster of virtual machines.
 
+![Alt text] (images/iRODS-Logo.png "iRODS")
+
 # Configure iRODS
 
 Before starting iRODS deployment, you have to generate some specific configuration keys, secrets and install reuired packages, follow the next steps
