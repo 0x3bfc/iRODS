@@ -16,9 +16,9 @@ icat_port: 1247
 port_range_begin: 20000
 port_range_end: 20199
 vault_directory: /var/lib/irods/Vault
-zone_key: m4rWHGgW4soMRT84
-negotiation_key: C4RLjbmKqvUYuJl4pT6QSp8dJy8fCX8Z
-control_plane_key: FyR1O7wkOj9FnIh_VgMIsdb812e1dQcN
+zone_key: N416XIciYSZ9n2_kx8CaSw0fNJPj576P
+negotiation_key: PXgWDgjd_5SS848zyfbtoqDUDCCyf79i 
+control_plane_key: 1wui5bTgMU1W9_zAi9XTpLPR5JRmEP6Q 
 control_plane_port: 1248
 schema_uri: https://schemas.irods.org/configuration
 admin_host: master
@@ -27,3 +27,11 @@ admin_host: master
 # idrop configuration
 idrop_port: 80
 idrob_web2_pkg: http://people.renci.org/~danb/FOR_DEMOS/iDrop-Web-2/idrop-web2.war
+
+# init icat
+dns: master
+
+
+# replica
+replica_name: myreplica
+

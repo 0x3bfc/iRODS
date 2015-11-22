@@ -20,14 +20,22 @@
    - include: roles/common/tasks/db.yml
 
 # Install iCAT
+
 - hosts: masters
   sudo: yes
   roles:
    - role: icat
-   - role: idrob2
 
 # install Resources
 - hosts: slaves
   sudo: yes
   roles:
    - role: resources
+
+# initialize iCAT & iRODS replica & iDROP2
+- hosts: master
+  sudo: yes
+  roles:
+    - role: init
+    - role: replica
+    - role: idrob2

@@ -24,7 +24,7 @@
   copy: src=server.xml dest=/etc/tomcat7/server.xml
 
 - name: copy configuration file
-  copy: src=idrop-web-config2.groovy dest=/etc/idrop-web/idrop-web-config2.groovy
+  template: src=idrop-web-config2.groovy.j2 dest=/etc/idrop-web/idrop-web-config2.groovy
 
 - name: Install iDROP-web2
   get_url: url={{ idrob_web2_pkg }} dest=/var/lib/tomcat7/webapps/
@@ -40,6 +40,7 @@
     a2enmod proxy_ajp;
     a2dissite 000-default;
     a2ensite ajp.apache;
+    service apache2 reload
 
 - name: configure idrob config
   template: src=idrob-config.j2  dest=/opt/irods/update-idw-config.sh
@@ -52,6 +53,6 @@
 
 - name: start iDROP-Web2 
   shell:
-    service apache2 start;
+    service apache2 restart;
     /opt/irods/update-idw-config.sh;
     /opt/irods/tcstart.sh;

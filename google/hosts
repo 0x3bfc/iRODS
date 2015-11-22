@@ -1,0 +1,9 @@
+[servers]
+master  ansible_ssh_port=22   ansible_ssh_host=104.154.49.137   ansible_ssh_user=ubuntu host_key_checking=false
+node-1  ansible_ssh_port=22   ansible_ssh_host=107.178.223.152    ansible_ssh_user=ubuntu host_key_checking=false
+
+[masters]
+master  ansible_ssh_port=22   ansible_ssh_host=104.154.49.137    ansible_ssh_user=ubuntu host_key_checking=false
+
+[slaves]
+node-1  ansible_ssh_port=22   ansible_ssh_host=107.178.223.152    ansible_ssh_user=ubuntu host_key_checking=false

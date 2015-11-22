@@ -1,0 +1,10 @@
+---
+
+- name: Configure replica
+  template: src=replica.j2 dest=/home/{{ ansible_ssh_user }}/replica.sh
+
+- name: Install replica
+  shell:
+     chmod +x /home/{{ ansible_ssh_user }}/replica.sh;
+     /home/{{ ansible_ssh_user }}/replica.sh
+  ignore_errors: yes

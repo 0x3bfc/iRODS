@@ -1,0 +1,10 @@
+#!/bin/bash
+# Generate responses for iRODS initialization on iCAT
+
+RESPFILE=$1
+
+echo "{{ dns }}" > $RESPFILE
+echo "{{ icat_port }}" >> $RESPFILE
+echo "{{ irods_admin }}" >> $RESPFILE
+echo "{{ icatzone }}" >> $RESPFILE
+echo "{{ irods_passwd }}" >> $RESPFILE

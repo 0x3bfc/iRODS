@@ -1,0 +1,17 @@
+---
+
+- name: prepare initialization response
+  template: src=initresponse.j2 dest=/home/{{ ansible_ssh_user }}/initresponse.sh
+
+- name: generate setup responses
+  shell:
+     mv /home/{{ ansible_ssh_user }}/initresponse.sh /opt/irods/initresponse.sh;
+     chmod +x /opt/irods/initresponse.sh;
+     /opt/irods/initresponse.sh /opt/irods/init_responses
+
+- name: Install python packages
+  shell: pip install -U pip jsonschema jinja2
+
+- name: config iCAT server
+  shell: iinit < /opt/irods/init_responses
+

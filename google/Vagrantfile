@@ -1,0 +1,76 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+$GOOGLE_PROJECT_ID = 'YOUR PROJECT ID'
+$GOOGLE_CLIENT_EMAIL = 'YOUR CLIENT EMAIL'
+$GOOGLE_JSON_KEY_LOCATION = '/home/ubuntu/.ssh/privatekey-gce.json'
+$LOCAL_USER = 'ubuntu'
+$LOCAL_SSH_KEY = '/home/ubuntu/.ssh/id_rsa'
+# Example Debian provistion script
+$PROVISION_DEBIAN = <<SCRIPT
+uname=$(uname -a)
+ver=$(cat /etc/debian_version)
+echo "== BEGIN: vagrant provisioning on '${uname}'"
+echo "== DEBIAN VERSION: ${ver}"
+echo "== UPDATING Debian repositories and packages"
+/usr/bin/apt-get update -y -qq > /dev/null 2>&1
+/usr/bin/apt-get upgrade -y -qq > /dev/null 2>&1
+extip=$(curl -s http://bot.whatismyipaddress.com)
+echo "== EXTERNAL IP: ${extip}"
+echo "== APPENDING /etc/motd"
+d=$(date +%r)
+echo "# ${d}" >> /etc/motd
+echo "== cat /etc/motd"
+cat /etc/motd
+SCRIPT
+
+
+Vagrant.configure('2') do |config|
+  config.vm.box = "gce"
+  config.vm.provision :shell, :inline => $PROVISION_DEBIAN
+
+  config.vm.define :z1c do |z1c|
+  z1c.vm.provider :google do |google, override|
+      google.google_project_id = $GOOGLE_PROJECT_ID
+      google.google_client_email = $GOOGLE_CLIENT_EMAIL
+      google.google_json_key_location = $GOOGLE_JSON_KEY_LOCATION
+      google.zone = 'us-central1-c'
+      google.can_ip_forward = true
+
+      override.ssh.username = $LOCAL_USER
+      override.ssh.private_key_path = $LOCAL_SSH_KEY
+
+      google.zone_config 'us-central1-c' do |z1c_zone|
+        z1c_zone.name = 'master'
+        z1c_zone.image = "ubuntu-1404-trusty-v20151113"
+        z1c_zone.machine_type = 'n1-standard-1'
+        z1c_zone.zone = 'us-central1-c'
+        z1c_zone.metadata = {"zone" => "US Central 1c", "sshKeys" => ['ubuntu:ssh-rsa AAAAB ubuntu@cis5']}
+      end
+    end
+  end
+
+
+  config.vm.define :z2c do |z2c|
+  z2c.vm.provider :google do |google, override|
+      google.google_project_id = $GOOGLE_PROJECT_ID
+      google.google_client_email = $GOOGLE_CLIENT_EMAIL
+      google.google_json_key_location = $GOOGLE_JSON_KEY_LOCATION
+      google.zone = 'us-central1-c'
+      google.can_ip_forward = true
+
+      override.ssh.username = $LOCAL_USER
+      override.ssh.private_key_path = $LOCAL_SSH_KEY
+
+      google.zone_config 'us-central1-c' do |z2c_zone|
+        z2c_zone.name = 'node-1'
+        z2c_zone.image = "ubuntu-1404-trusty-v20151113"
+        z2c_zone.machine_type = 'n1-standard-1'
+        z2c_zone.zone = 'us-central1-c'
+        z2c_zone.metadata = {"zone" => "US Central 1c", "sshKeys" => ['ubuntu:ssh-rsa AAAAB ubuntu@cis5']}
+      end
+    end
+  end
+
+
+
+end

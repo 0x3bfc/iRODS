@@ -3,9 +3,15 @@ The Integrated Rule-Oriented Data System (iRODS) is an open source data manageme
 
 ![Alt text] (images/iRODS-Logo.png "iRODS")
 
+
+In this repo we deploy iCAR, iRODS resources, Replica and iDROP2 web .. to run over Google Compute Engine, AWS, and Windows Azure.
+
+
 # Configure iRODS
 
 Before starting iRODS deployment, you have to generate some specific configuration keys, secrets and install reuired packages, follow the next steps
+
+**This README File for Local Deployment To deploy them on Google or AWS check their directories**
 
 **Install Vagrant**
 
@@ -47,7 +53,7 @@ modify <code>group_vars/all</code> file
 
 Generate zone key and modify the value of zone_key
 
-    $ (openssl rand -base64 16 | sed 's,/,S,g' | sed 's,+,_,g' | cut -c 1-16 | tr -d '\n' ; echo "")
+    $ (openssl rand -base64 32 | sed 's,/,S,g' | sed 's,+,_,g' | cut -c 1-32 | tr -d '\n' ; echo "")
 
 Generate negotiation key and modify the value of negotiation_key
 

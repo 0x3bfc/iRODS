@@ -1,6 +1,6 @@
 ---
 - name: Install python-apt, aptitude, and debconf-utils
-  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils python-software-properties csh python-pip python-dev wget
+  shell: apt-get update && apt-get -y install openssh-server python-apt aptitude debconf-utils python-software-properties csh python-pip python-dev wget
 
 - name: Install python packages
   shell: pip install jsonschema jinja2
@@ -19,8 +19,8 @@
   notify:
   - restart rsyslog
 
-- name: Install Common Packages
-  shell: apt-get install openssh-server 
+#- name: Install Common Packages
+#  shell: apt-get install openssh-server 
  
 - name: Create the hosts file for all machines
   template: src=hosts.j2 dest=/etc/hosts
