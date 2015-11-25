@@ -5,8 +5,9 @@ To provision a cluster of virtual machines on google compute engine you have to 
 Not: Please do not hesitate to ask if you have an issue with this readme file
 
 
-#Install Vagrant Google plugin#
+#Import vagrant box & Install Vagrant Google plugin#
 
+      $ vagrant box add gce https://github.com/mitchellh/vagrant-google/raw/master/google.box
       $ vagrant plugin install vagrant-google
 
 #Configure Vagrantfile:
