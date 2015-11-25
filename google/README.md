@@ -21,9 +21,13 @@ Vagrant uses vagrant file as a configuration file where user defines virtual mac
 	$LOCAL_USER = 'ubuntu'
 	$LOCAL_SSH_KEY = '/home/ubuntu/.ssh/id_rsa'
 
-To generate this <code>privatekey-gce.json</code> kindly follow these instructions [here](https://github.com/mitchellh/vagrant-google) <code>id_rsa</code> is your private key on your local machine.
+To generate this <code>privatekey-gce.json</code> kindly follow these instructions [here](https://github.com/mitchellh/vagrant-google). The <code>id_rsa</code> is your private key on your local machine.
 
-For each VM in Vagrant file update add your public key as shown below:
+Get your public key:
+
+        $ cat ~/.ssh/id_rsa.pub
+
+For each VM in Vagrant file, add your public key as shown below:
 
         z2c_zone.metadata = {"zone" => "US Central 1c", "sshKeys" => ['ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnDFqXBeg6R/w5K9hMNhfb/f9Rt5AzFfjVB9XXXXXXXXXXXXXXXXXXXXXXXXXXXX ubuntu@cis5']}
 
