@@ -4,7 +4,7 @@ The Integrated Rule-Oriented Data System (iRODS) is an open source data manageme
 ![Alt text] (images/iRODS-Logo.png "iRODS")
 
 
-In this repo we deploy iCAR, iRODS resources, Replica and iDROP2 web .. to run over Google Compute Engine, AWS, and Windows Azure.
+We are going to deploy iCAT, iRODS resources, Replica and iDROP2 web .. to run over Google Compute Engine, AWS, and Windows Azure.
 
 
 # Configure iRODS
