@@ -70,7 +70,17 @@ Once you install vagrant, ansible, and your keys and passwords are created, you 
 
 Create Virtual Machines:
 
+###Virtual Box:
+
     $ vagrant up --provider virtualbox
+
+###Amazon Web Services:
+
+check out this [README](https://github.com/aabdulwahed/iRODS/tree/master/aws) file, showning how to start AWS instances using vagrant
+
+###Google Compute Engine
+
+check out this [README](https://github.com/aabdulwahed/iRODS/tree/master/google) file, showning how to start Google Compute instances using vagrant
 
 Edit hosts file by modifying the hosts ip, username, and passwords for each server, then run ansible playbook
 
