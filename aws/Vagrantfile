@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "dummy"
+
+  config.vm.define :z1c do |z1c|
+  z1c.vm.provider :aws do |aws, override|
+    aws.access_key_id = 'YOUR AWS ACCESS KEY'
+    aws.secret_access_key = 'YOUR AWS SECRET KEY'
+    aws.instance_type = 'm3.large'
+    aws.ami = 'ami-7747d01e'
+    aws.security_groups = ['vagrant']
+
+    # More comprehensive region config
+    aws.region_config 'us-east-1' do |region|
+      region.ami = 'ami-7747d01e'
+      region.keypair_name = 'mpi-key'
+    end
+    override.ssh.username = 'ubuntu'
+    # ABSOLUTE PATH OF YOUR SSH PRIVATE KEY
+    override.ssh.private_key_path = '/home/ubuntu/IRODS/iRODS/aws/keys/irods.pem'
+  end
+  end
+   config.vm.define :z2c do |z2c|
+  z2c.vm.provider :aws do |aws, override|
+    aws.access_key_id = 'YOUR AWS ACCESS KEY'
+    aws.secret_access_key = 'YOUR AWS SECRET KEY'
+    aws.instance_type = 'm3.large'
+    aws.ami = 'ami-7747d01e'
+    # CREATE A NEW SECURITY GROUP CALLED VAGRANT
+    aws.security_groups = ['vagrant']
+
+    # More comprehensive region config
+    aws.region_config 'us-east-1' do |region|
+      region.ami = 'ami-7747d01e'
+      region.keypair_name = 'mpi-key'
+    end
+    override.ssh.username = 'ubuntu'
+    # ABSOLUTE PATH OF YOUR SSH PRIVATE KEY
+    override.ssh.private_key_path = '/home/ubuntu/IRODS/iRODS/aws/keys/irods.pem'
+  end
+  end
+
+end
