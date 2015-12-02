@@ -18,20 +18,18 @@
   debconf: name=tzdata question='tzdata/Zones/Etc' value='UTC' vtype='select'
   notify:
   - restart rsyslog
-
-#- name: Install Common Packages
-#  shell: apt-get install openssh-server 
  
 - name: Create the hosts file for all machines
   template: src=hosts.j2 dest=/etc/hosts
 
 - name: copy private key
   copy: src=id_rsa dest=/home/{{ ansible_ssh_user }}/.ssh/id_rsa
+  when: not cloud
 
 - name: copy public key
   copy: src=id_rsa.pub  dest=/home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub
+  when: not cloud
 
 - name: authorized keys
-  shell: cat /home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub > /home/{{ ansible_ssh_user }}/.ssh/authorized_keys
-
- 
+  shell: cat /home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub > /home/{{ ansible_ssh_user }}/.ssh/authorized_keys 
+  when: not cloud

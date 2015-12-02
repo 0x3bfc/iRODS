@@ -16,7 +16,7 @@
      /opt/irods/genresponse.sh /opt/irods/setup_responses
 
 - name: Install python packages
-  shell: pip install -U pip jsonschema jinja2
+  shell: pip install jsonschema jinja2
 
 - name: Configure Resource Service
   shell: /var/lib/irods/packaging/setup_irods.sh < /opt/irods/setup_responses

@@ -3,12 +3,16 @@
 
 - hosts: servers
   sudo: yes
+  vars: 
+    cloud: true
   roles:
    - role: common  
 
 # Install PostgreSQL
 - hosts: servers
   sudo: yes
+  vars:
+    cloud: true
   tasks:
    - include: roles/common/tasks/postgresql.yml
 
@@ -16,6 +20,8 @@
   sudo: yes
   sudo_user: postgres
   gather_facts: no
+  vars:
+    cloud: true
   tasks:
    - include: roles/common/tasks/db.yml
 
@@ -23,18 +29,24 @@
 
 - hosts: masters
   sudo: yes
+  vars:
+    cloud: true
   roles:
    - role: icat
 
 # install Resources
 - hosts: slaves
   sudo: yes
+  vars:
+    cloud: true
   roles:
    - role: resources
 
 # initialize iCAT & iRODS replica & iDROP2
-- hosts: master
+- hosts: masters
   sudo: yes
+  vars:
+    cloud: true
   roles:
     - role: init
     - role: replica
