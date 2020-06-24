@@ -1,7 +1,7 @@
 # iRODS
 The Integrated Rule-Oriented Data System (iRODS) is an open source data management software used by research organizations and government agencies worldwide. This package contains Ansible Scripts for Installation and Deployment of iRODS on a cluster of virtual machines.
 
-![Alt text] (images/iRODS-Logo.png "iRODS")
+![Alt text](images/iRODS-Logo.png "iRODS")
 
 
 We are going to deploy iCAT, iRODS resources, Replica and iDROP2 web .. to run over Google Compute Engine, AWS, and Windows Azure.
@@ -64,29 +64,29 @@ Generate control plane key and modify the value of controle plane key
     $ openssl rand -base64 32 | sed 's,/,S,g' | sed 's,+,_,g' | cut -c 1-32
 
 
-#Install iRODS
+# Install iRODS
 
 Once you install vagrant, ansible, and your keys and passwords are created, you are able to install iRODS over your cluster, but before that you have to start a new cluster using vagrant, in this package, you have Vagrantfile which creates three nodes one iCAT server containes (iCAT and iDROP-WEB2) and two resources servers, the same thing can be done if you have pre-defined physical servers in hosts file "<code>hosts</code>", what we are going to do now is to start cluster of virtual machines using virtualbox and vagrantfile, if you want to scale up your cluster just edit the <code>Vagrantfile</code> and <code>hosts</code> file.
 
 Create Virtual Machines:
 
-###Virtual Box:
+### Virtual Box:
 
     $ vagrant up --provider virtualbox
 
-###Amazon Web Services:
+### Amazon Web Services:
 
 check out this [README](https://github.com/aabdulwahed/iRODS/tree/master/aws) file, showning how to start AWS instances using vagrant
 
-###Google Compute Engine
+### Google Compute Engine
 
 check out this [README](https://github.com/aabdulwahed/iRODS/tree/master/google) file, showning how to start Google Compute instances using vagrant
 
-###Hosts File
+### Hosts File
 
 Edit hosts file by modifying the hosts ip, username, and passwords for each server.
 
-#Start Deployment
+# Deployment
 
 Run ansible playbook
 
